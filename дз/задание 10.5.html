@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Кредитный калькулятор</title>
+</head>
+
+<body>
+    <ul>
+    <li>если клиенту нет 18 лет, то кредит он не получит</li>
+    <li>если клиенту от 18 до 21, то он может получить максимум 50000</li>
+    <li>если клиенту от 22 до 35, то он сможет получить максимум 400000</li>
+    <li>если клиенту от 36 до 65, то ему одобрят максимум 1000000</li>
+    <li>кредит могут выдавать суммами кратными 10000.</li>
+    </ul>
+
+    <script type="text/javascriptS">
+        const age = prompt('Введите Ваш возраст')
+        if (isNaN(age) || age === null || age.trim() === "") {
+            alert("Видимо вам кредит не нужен. Всего доброго!");
+        };
+        let maxCredit;
+
+        if (age < 18) {
+            maxCredit = 0;
+            alert("Видимо вам кредит не нужен. Всего доброго");
+            return;
+        } else if (age >= 18 && age <= 21) {
+            maxCredit = 50000;
+        } else if (age >= 22 && age <= 35) {
+            maxCredit = 400000;
+        } else if (age >= 36 && age <= 65) {
+            maxCredit = 1000000;
+        } else {
+            alert("Видимо вам кредит не нужен. Всего доброго");
+        }
+
+        let requestedAmount = prompt(`Мы можем вам выдать максимум ${maxCredit}\nВведите сумму, кратную 1000:`);
+
+        
+        requestedAmount = Number(requestedAmount);
+        if (requestedAmount % 1000 !== 0) {
+            
+            let closestAmount = Math.round(requestedAmount / 1000) * 1000;
+            if (closestAmount > maxCredit) {
+                closestAmount = Math.floor(maxCredit / 1000) * 1000;
+            }
+            alert(`Вы ввели сумму не кратную 1000\n Мы можем вам выдать ${closestAmount}.`);
+            return;
+        }
+
+        if (requestedAmount > maxCredit) {
+            alert(`Кредитная сумма превышает максимальную\n Максимально возможная сумма: ${maxCredit}`);
+        } else {
+            alert(`Кредит одобрен на сумму ${requestedAmount}.`);
+        }
+    
+
+
+    </script>
+</body>
+
+</html>
